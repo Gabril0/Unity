@@ -53,12 +53,13 @@ public class ShootThing : MonoBehaviour
     IEnumerator ParryEffect()
     {
         gameObject.tag = "ParriedBullet";
-        transform.position = Vector3.Lerp(transform.position, originalPosition, lerpInterpolation = lerpInterpolation + 0.1f); //the bullet goes back to the caster
+        //the bullet goes back to the caster
         //when lerp = 1, goes back to caster, when 0 goes to the position that was parried and the path in between
         transform.localScale = new Vector3(1.2f,1.2f,1.2f); //makes the bullet larger for visual effect
 
 
         Time.timeScale = 0.1f; //pauses the game
+        transform.position = Vector3.Lerp(transform.position, originalPosition, lerpInterpolation = lerpInterpolation + 0.1f);
         float pauseEndTime = Time.realtimeSinceStartup + pauseFrameParry; //makes an time and add the elapsed time to the desired pause time
         while (Time.realtimeSinceStartup < pauseEndTime) //when the real time is greater than the pause, the game unpause
         {

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float  punchCooldown;
 
     public float power;
+    public bool gameIsOver;
 
     private float verticalMovement, horizontalMovement;
     private float lastShot, lastPunch;
@@ -123,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void checkHealth() {
         if (health <= 0) {
+            gameIsOver = true;
             Destroy(gameObject);
         }
     }
