@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Pool;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalMovement, horizontalMovement;
     private float lastShot, lastPunch;
     private bool isPunching = false;
-
+    private ObjectPool<GameObject> _pool;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,20 @@ public class PlayerMovement : MonoBehaviour
         maiPunch = GameObject.Find("MaiPunch");
 
         maiPunch.SetActive(false);
+
+        _pool = new ObjectPool<GameObject>(
+            () =>
+            { return Instantiate(bullet, transform.position, transform.rotation); },
+            GameObject =>
+            {
+                bullet.gameObject.SetActive(true);
+            },
+            GameObject => {
+                bullet.gameObject.SetActive(false);
+            },
+            GameObject => { Destroy(bullet.gameObject); },
+            false, //check later
+            50, 100);
     }
 
     // Update is called once per frame
@@ -55,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(1) && Time.time - lastShot > coolDownShot && !isPunching)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            _pool.Get();//Instantiate(bullet, transform.position, transform.rotation);
             lastShot = Time.time;
         }
     }
