@@ -130,10 +130,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyBullet" && !isPunching)
+        if ((other.CompareTag("EnemyBullet") || other.CompareTag("Enemy")) && !isPunching)
         {
             health = health - 100;
-            Destroy(other.gameObject);
+            if(other.CompareTag("EnemyBullet")) Destroy(other.gameObject);
         }
     }
 

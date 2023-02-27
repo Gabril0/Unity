@@ -12,21 +12,21 @@ public class EnemyMovement : EnemyEssentials
     [SerializeField] float punchSlowdown;
     protected void OnTriggerEnter(Collider other) //comparisons between collisions
     {
-        if (other.tag == "PlayerBullet")
+        if (other.CompareTag("PlayerBullet"))
         {
             health = health - playerScript.power;
             Destroy(other.gameObject);
         }
-        if (other.tag == "Parry" || other.tag == "PunchBox")
+        if (other.CompareTag("Parry") || other.CompareTag("PunchBox"))
         {
             health = health - playerScript.power * 1.5f;
             punched = true;
         }
-        if (other.tag == "ParriedBullet")
+        if (other.CompareTag("ParriedBullet"))
         {
-            health = health - playerScript.power * 10;
+            health = health - shotPower * 10;
         }
-        if (other.tag != "EnemyBullet")
+        if (!other.CompareTag("EnemyBullet"))
             Debug.Log("other: " + other.tag);
     }
 

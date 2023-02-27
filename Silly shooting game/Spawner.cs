@@ -4,12 +4,13 @@ using UnityEngine.Pool;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] float spawnRate, spawnStart, objectSpeed;
-    [SerializeField] GameObject thingToSpawn;
-    private ObjectPool<GameObject> _pool;
+    [SerializeField] ShootThing thingToSpawn;
+    private ObjectPool<ShootThing> _pool;
     // Start is called before the first frame update
     void Start()
     {
-        _pool = new ObjectPool<GameObject>(
+        thingToSpawn.speed = objectSpeed;
+        _pool = new ObjectPool<ShootThing>(
             () =>
             { return Instantiate(thingToSpawn, transform.position, transform.rotation); },
             GameObject =>

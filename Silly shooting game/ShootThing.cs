@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ShootThing : MonoBehaviour
 {
-    [SerializeField] float speed, pauseFrameParry;
+    [SerializeField] public float speed, pauseFrameParry;
     [SerializeField] [Range(0f,1f)]float lerpInterpolation;
     private Vector3 originalPosition;
     private bool parried;

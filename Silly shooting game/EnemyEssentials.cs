@@ -4,9 +4,9 @@ public class EnemyEssentials : MonoBehaviour
 {
     [SerializeField] float boundsX = 9, boundsY = 5;
     [Range(0, 100000)][SerializeField] protected float health;
-    [Range(0.001f, 0.01f)][SerializeField] protected float moveTowardSpeed;
+    [Range(0.001f, 0.1f)][SerializeField] protected float moveTowardSpeed;
     [SerializeField] protected float enemySpeed;
-    [SerializeField] protected float shotPower, shotSpeed;
+    [SerializeField] protected float shotPower;
     [SerializeField] protected float moveRate;
     private float timePassed = 0f;
 
