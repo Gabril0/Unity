@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyMovement : EnemyEssentials
 {
@@ -32,9 +33,10 @@ public class EnemyMovement : EnemyEssentials
 
     IEnumerator PunchEffect()
     {
-
+        if ((health - playerScript.power * 1.5f) <= 0) yield return null;
         Time.timeScale = 0.01f; //pauses the game
-        enemyRb.AddRelativeForce(Vector3.down * Time.deltaTime * 7500, ForceMode.Impulse);
+        //enemyRb.AddRelativeForce(Vector3.down * Time.deltaTime * 7500, ForceMode.Impulse);
+        transform.Translate(Vector3.down * Time.deltaTime * 2000);
 
         float pauseEndTime = Time.realtimeSinceStartup + punchSlowdown; //makes an time and add the elapsed time to the desired pause time
         while (Time.realtimeSinceStartup < pauseEndTime) //when the real time is greater than the pause, the game unpause

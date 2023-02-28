@@ -44,15 +44,15 @@ public class HeadbuttEnemy : EnemyMovement
             {
                 followPlayer = true;
             }
+            else followPlayer = false;
             lastHeadbutt = Time.time;
 
         }
     }
 
-
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             isTouchingPlayer = true;
         }

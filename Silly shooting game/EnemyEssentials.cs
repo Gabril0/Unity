@@ -15,7 +15,8 @@ public class EnemyEssentials : MonoBehaviour
     { //kills enemy when health goes to 0
         if (health <= 0)
         {
-            Destroy(gameObject);
+            if (GameObject.Find("ShielderEnemy") != null && gameObject.tag != "Shielder") health = 1;
+            else Destroy(gameObject);
         }
     }
 
@@ -55,7 +56,7 @@ public class EnemyEssentials : MonoBehaviour
         if (timePassed > moveRate)
         {
             Vector3 randomMovement = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
-            enemyRb.AddRelativeForce(randomMovement * Time.deltaTime * enemySpeed, ForceMode.VelocityChange);
+            enemyRb.AddRelativeForce(randomMovement * Time.deltaTime * enemySpeed, ForceMode.Impulse);
             timePassed = 0f;
         }
     }
